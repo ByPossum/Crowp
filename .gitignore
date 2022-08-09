@@ -33,3 +33,5 @@
 
 # custom ignores
 TestFiles/
+.vs/
+Debug/
