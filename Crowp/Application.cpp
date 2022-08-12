@@ -15,21 +15,29 @@ Application::~Application()
 {
 	delete fp;
 	delete readFile;
+	delete context;
 }
 
 int Application::main()
 {
 	ImGui::NewFrame();
-	ImGui::Render();
 	ImGui::EndFrame();
+	ImGui::Render();
+	DrawWindow();
 	return 0;
 }
 
 void Application::WindowSetup()
 {
-	bool b_activeWindow = true;
+	context = ImGui::CreateContext();
+	ImGui::SetCurrentContext(context);
+	b_activeWindow = true;
+}
 
+void Application::DrawWindow()
+{
 	ImGui::Begin("Crowp", &b_activeWindow, ImGuiWindowFlags_MenuBar);
+	ImGui::SetWindowSize(ImVec2(900, 900));
 	if (ImGui::BeginMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
