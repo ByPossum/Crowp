@@ -1,6 +1,7 @@
 #pragma once
 #include "GenericReader.h"
 #include "FileUtilities.h"
+#include "imgui.h"
 
 class Application
 {
@@ -11,6 +12,7 @@ public:
 protected:
 	GenericReader<string>* readFile;
 	FileUtils* fp;
+	void WindowSetup();
 private:
 
 };
