@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 using namespace std;
 using namespace rapidxml;
 
@@ -36,7 +37,6 @@ public:
 	/// <param name="_fileName">Path to data</param>
 	xml_document<T>* BufferData(string* _fileName)
 	{
-		std::cout << *_fileName << std::endl;
 		//xml_document<T>* doc = new xml_document<T>();
 		string* _file = ReadFromFile(*_fileName);
 		std::cout << *_file << std::endl;

@@ -148,10 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="FileUtilities.h" />
     <ClInclude Include="GenericReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="GenericReader.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

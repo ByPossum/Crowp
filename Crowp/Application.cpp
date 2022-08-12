@@ -1,15 +1,16 @@
 #include "Application.h"
-#include "GenericReader.h"
 
 Application::Application()
 {
-	string* fp = new string("C:\\Users\\ImHiP\\Documents\\GitHub\\Crowp\\Crowp\\TestFiles\\Test.txt");
-	readFile = new GenericReader<string>(fp);
+	fp = new FileUtils();
+	string* filePath = new string(fp->CurrentPath() + "\\TestFiles\\Test.txt");
+	readFile = new GenericReader<string>(filePath);
 	delete fp;
 }
 
 Application::~Application()
 {
+	delete fp;
 	delete readFile;
 }
 
