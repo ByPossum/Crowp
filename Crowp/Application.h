@@ -14,6 +14,7 @@ protected:
 	GenericReader<string>* readFile;
 	FileUtils* fp;
 	ImGuiContext* context;
+	ImGuiWindow* w_window;
 	bool b_activeWindow;
 	void WindowSetup();
 	void DrawWindow();

@@ -6,7 +6,7 @@ Application::Application()
 	string* filePath = new string(fp->CurrentPath() + "\\TestFiles\\Test.txt");
 	readFile = new GenericReader<string>(filePath);
 	delete fp;
-	
+
 	WindowSetup();
 
 }
@@ -16,10 +16,12 @@ Application::~Application()
 	delete fp;
 	delete readFile;
 	delete context;
+	delete w_window;
 }
 
 int Application::main()
 {
+	ImGui::SetWindowSize(w_window, ImVec2(900, 900), 0);
 	ImGui::NewFrame();
 	ImGui::EndFrame();
 	ImGui::Render();
@@ -30,14 +32,15 @@ int Application::main()
 void Application::WindowSetup()
 {
 	context = ImGui::CreateContext();
+	w_window = new ImGuiWindow(context, "Crowp");
 	ImGui::SetCurrentContext(context);
+	ImGui::CreateNewWindowSettings("Crowp");
 	b_activeWindow = true;
 }
 
 void Application::DrawWindow()
 {
 	ImGui::Begin("Crowp", &b_activeWindow, ImGuiWindowFlags_MenuBar);
-	ImGui::SetWindowSize(ImVec2(900, 900));
 	if (ImGui::BeginMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
