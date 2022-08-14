@@ -21,7 +21,7 @@ Application::~Application()
 
 int Application::main()
 {
-	ImGui::SetWindowSize(w_window, ImVec2(900, 900), 0);
+	ImGui::SetWindowSize(w_window, io->DisplaySize, 0);
 	ImGui::NewFrame();
 	ImGui::EndFrame();
 	ImGui::Render();
@@ -33,6 +33,13 @@ void Application::WindowSetup()
 {
 	context = ImGui::CreateContext();
 	w_window = new ImGuiWindow(context, "Crowp");
+	atlas = new ImFontAtlas();
+	ImTextureID* tex = new ImTextureID();
+	atlas->TexID = tex;
+	atlas->Build();
+	io = new ImGuiIO();
+	io->DisplaySize = ImVec2(900, 900);
+	context->IO = *io;
 	ImGui::SetCurrentContext(context);
 	ImGui::CreateNewWindowSettings("Crowp");
 	b_activeWindow = true;

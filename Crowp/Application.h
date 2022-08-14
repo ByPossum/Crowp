@@ -15,6 +15,8 @@ protected:
 	FileUtils* fp;
 	ImGuiContext* context;
 	ImGuiWindow* w_window;
+	ImGuiIO* io;
+	ImFontAtlas* atlas;
 	bool b_activeWindow;
 	void WindowSetup();
 	void DrawWindow();
