@@ -2,6 +2,8 @@
 
 Application::Application()
 {
+	SDL_Init(SDL_INIT_VIDEO);
+
 	fp = new FileUtils();
 	string* filePath = new string(fp->CurrentPath() + "\\TestFiles\\Test.txt");
 	readFile = new GenericReader<string>(filePath);
@@ -14,6 +16,7 @@ Application::~Application()
 	delete fp;
 	delete readFile;
 	delete window;
+	SDL_Quit();
 }
 
 int Application::main()

@@ -20,11 +20,16 @@ Window::~Window()
 	delete io;
 	delete atlas;
 	delete tex;
+	SDL_DestroyRenderer(sdl_renderer);
+	SDL_DestroyWindow(sdl_window);
 }
 
 void Window::WindowSetup()
 {
 	context = ImGui::CreateContext();
+	sdl_window = SDL_CreateWindow(s_windowName->c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 900, 900, 0);
+	sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_ACCELERATED);
+	ImGui_ImplSDL2_InitForSDLRenderer(sdl_window, sdl_renderer);
 	w_window = new ImGuiWindow(context, s_windowName->c_str());
 	atlas = new ImFontAtlas();
 	tex = new ImTextureID();
