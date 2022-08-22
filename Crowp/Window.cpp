@@ -14,12 +14,7 @@ Window::Window(std::string* _windowName)
 
 Window::~Window()
 {
-	delete context;
-	delete w_window;
-	delete s_windowName;
-	delete io;
-	delete atlas;
-	delete tex;
+	//delete s_windowName;
 	SDL_DestroyRenderer(sdl_renderer);
 	SDL_DestroyWindow(sdl_window);
 	ImGui_ImplSDL2_Shutdown();

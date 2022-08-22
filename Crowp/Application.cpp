@@ -7,8 +7,8 @@ Application::Application()
 	fp = new FileUtils();
 	string* filePath = new string(fp->CurrentPath() + "\\TestFiles\\Test.txt");
 	readFile = new GenericReader<string>(filePath);
-	delete fp;
 	window = new Window(new string("Crowp"));
+	i_running = 1;
 }
 
 Application::~Application()

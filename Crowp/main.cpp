@@ -2,7 +2,6 @@
 
 int main(int argv, char** args)
 {
-	int running = 1;
 	Application* app = new Application();
 	while (app->Running())
 	{
