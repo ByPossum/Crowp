@@ -10,6 +10,9 @@ Window::Window(std::string* _windowName)
 {
 	s_windowName = _windowName;
 	WindowSetup();
+	i_windowRunning = 1;
+	bool b = true;
+	b_open = &b;
 }
 
 Window::~Window()
@@ -33,7 +36,7 @@ void Window::WindowSetup()
 	//ImGui::SetCurrentContext(context);
 	//ImGui::CreateNewWindowSettings("Crowp");
 	// SDL Init
-	sdl_window = SDL_CreateWindow(s_windowName->c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 900, 900, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+	sdl_window = SDL_CreateWindow(s_windowName->c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 900, 900, SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_BORDERLESS);
 	sdl_renderer = SDL_CreateRenderer(sdl_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 
 	// Dear ImGui Init
@@ -48,21 +51,29 @@ void Window::WindowSetup()
 
 void Window::DrawWindow()
 {
-	ImGui::Begin("Crowp");
-	//if (ImGui::BeginMenuBar())
-	//{
-	//	if (ImGui::BeginMenu("File"))
-	//	{
-	//		if (ImGui::MenuItem("Connect To Unity")) {}
-	//	}
-	//	ImGui::EndMenu();
-	//}
-	//ImGui::EndMenuBar();
+	ImGui::Begin("Crowp", b_open);
+	ImGui::SetWindowPos(ImVec2(0, 0));
+	ImGui::SetWindowSize(ImVec2(900, 900), 0);
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("File", true))
+		{
+			if (ImGui::MenuItem("Connect To Unity")) {}
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
 	ImGui::Text("Hi There");
 	ImGui::End();
 }
 
 void Window::Update()
+{
+	GatherInputs();
+	Render();
+}
+
+void Window::Render()
 {
 	ImGui_ImplSDLRenderer_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
@@ -76,4 +87,35 @@ void Window::Update()
 	ImGui::Render();
 	ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
 	SDL_RenderPresent(sdl_renderer);
+}
+
+void Window::GatherInputs()
+{
+	SDL_Event _event;
+	while (SDL_PollEvent(&_event))
+	{
+		ImGui_ImplSDL2_ProcessEvent(&_event);
+		if (_event.type == SDL_QUIT)
+			SetRunning(0);
+		if (_event.type == SDL_WINDOWEVENT && _event.window.event == SDL_WINDOWEVENT_CLOSE && _event.window.windowID == SDL_GetWindowID(sdl_window))
+			SetRunning(0);
+		if (_event.type == SDL_MOUSEBUTTONDOWN && _event.button.button == SDL_BUTTON_LEFT)
+		{
+		}
+	}
+}
+
+int Window::Running()
+{
+	return i_windowRunning;
+}
+
+void Window::SetRunning(int _newVal)
+{
+	i_windowRunning = _newVal;
+	if (_newVal == 0)
+	{
+		bool f = false;
+		b_open = &f;
+	}
 }

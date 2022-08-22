@@ -16,6 +16,10 @@ public:
 	void WindowSetup();
 	void DrawWindow();
 	void Update();
+	void Render();
+	void GatherInputs();
+	int Running();
+	void SetRunning(int _newVal);
 protected:
 	SDL_Window* sdl_window;
 	SDL_Renderer* sdl_renderer;
@@ -26,6 +30,8 @@ protected:
 	std::string* s_windowName;
 	ImTextureID* tex;
 	bool b_activeWindow;
+	int i_windowRunning;
+	bool* b_open;
 private:
 
 };

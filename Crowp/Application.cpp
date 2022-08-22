@@ -22,7 +22,7 @@ Application::~Application()
 void Application::main()
 {
 	window->Update();
-	i_running = 1;
+	i_running = window->Running();
 }
 
 int Application::Running()
