@@ -4,9 +4,9 @@ int main(int argv, char** args)
 {
 	int running = 1;
 	Application* app = new Application();
-	while (running)
+	while (app->Running())
 	{
-		return app->main();
+		app->main();
 	}
 	delete app;
 	return 0;

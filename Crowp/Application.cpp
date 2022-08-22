@@ -2,7 +2,7 @@
 
 Application::Application()
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
 
 	fp = new FileUtils();
 	string* filePath = new string(fp->CurrentPath() + "\\TestFiles\\Test.txt");
@@ -19,8 +19,13 @@ Application::~Application()
 	SDL_Quit();
 }
 
-int Application::main()
+void Application::main()
 {
 	window->Update();
-	return 0;
+	i_running = 1;
+}
+
+int Application::Running()
+{
+	return i_running;
 }

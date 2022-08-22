@@ -8,11 +8,13 @@ class Application
 public:
 	Application();
 	~Application();
-	int main();
+	void main();
+	int Running();
 protected:
 	GenericReader<string>* readFile;
 	FileUtils* fp;
 	Window* window;
+	int i_running;
 private:
 
 };

@@ -173,6 +173,7 @@
     <ClCompile Include="..\Dependancies\imgui-master\imgui_demo.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_draw.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\Dependancies\imgui-master\imgui_impl_sdlrenderer.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_widgets.cpp" />
     <ClCompile Include="Application.cpp" />

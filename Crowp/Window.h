@@ -3,6 +3,7 @@
 #include "imgui_internal.h"
 #include "SDL.h"
 #include "imgui_impl_sdl.h"
+#include "imgui_impl_sdlrenderer.h"
 #include <stdio.h>
 #include <string>
 
