@@ -31,7 +31,7 @@ protected:
 	ImTextureID* tex;
 	bool b_activeWindow;
 	int i_windowRunning;
-	bool* b_open;
+	bool b_open;
 private:
 
 };

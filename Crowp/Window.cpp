@@ -11,8 +11,8 @@ Window::Window(std::string* _windowName)
 	s_windowName = _windowName;
 	WindowSetup();
 	i_windowRunning = 1;
-	bool b = true;
-	b_open = &b;
+	//bool b = true;
+	b_open = true;
 }
 
 Window::~Window()
@@ -51,20 +51,19 @@ void Window::WindowSetup()
 
 void Window::DrawWindow()
 {
-	ImGui::Begin("Crowp", b_open);
+	ImGui::Begin("Crowp", &b_open, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_MenuBar);
 	ImGui::SetWindowPos(ImVec2(0, 0));
 	ImGui::SetWindowSize(ImVec2(900, 900), 0);
-	if (ImGui::BeginMenuBar())
+	ImGui::End();
+	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("File", true))
 		{
 			if (ImGui::MenuItem("Connect To Unity")) {}
 			ImGui::EndMenu();
 		}
-		ImGui::EndMenuBar();
+		ImGui::EndMainMenuBar();
 	}
-	ImGui::Text("Hi There");
-	ImGui::End();
 }
 
 void Window::Update()
@@ -107,15 +106,10 @@ void Window::GatherInputs()
 
 int Window::Running()
 {
-	return i_windowRunning;
+	return b_open;
 }
 
 void Window::SetRunning(int _newVal)
 {
-	i_windowRunning = _newVal;
-	if (_newVal == 0)
-	{
-		bool f = false;
-		b_open = &f;
-	}
+	b_open = _newVal;
 }
