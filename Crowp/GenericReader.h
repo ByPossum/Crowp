@@ -40,6 +40,7 @@ public:
 		//xml_document<T>* doc = new xml_document<T>();
 		string* _file = ReadFromFile(*_fileName);
 		std::cout << *_file << std::endl;
+		//xml_node _firstNode = doc.first
 		//doc->parse(_file);
 		delete _file;
 		//return doc;
