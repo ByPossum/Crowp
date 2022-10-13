@@ -1,0 +1,40 @@
+﻿  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_sdl.cpp
+  imgui_impl_sdlrenderer.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Action.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Action.cpp(28,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Action.cpp(31,20): warning C4018: '<': signed/unsigned mismatch
+  ActionSet.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\ActionSet.cpp(23,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\ActionSet.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
+  Agent.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Agent.cpp(29,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Agent.cpp(38,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Agent.cpp(39,21): warning C4018: '<': signed/unsigned mismatch
+  AgentManager.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\AgentManager.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
+  Application.cpp
+  FileUtils.cpp
+  main.cpp
+  State.cpp
+  StateCollection.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\StateCollection.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
+  Window.cpp
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(85,5): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(97,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(99,93): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(124,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(126,24): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(129,62): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(161,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Crowp\Window.cpp(164,73): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 2381 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Crowp.vcxproj -> C:\Users\ImHiP\Documents\GitHub\Crowp\Crowp\Release\Crowp.exe
+          1 file(s) copied.
