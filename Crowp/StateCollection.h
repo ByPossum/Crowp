@@ -10,7 +10,8 @@ public:
 	StateCollection();
 	 StateCollection(State _states[], int _stateSize);
 	~StateCollection();
-
+	void AddState(State* _state);
+	vector<State*> GetStates();
 protected:
 
 private:

@@ -89,6 +89,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependancies\imgui-master;$(SolutionDir)Dependancies\rapidxml-1.13;$(SolutionDir)Dependancies\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,6 +110,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependancies\imgui-master;$(SolutionDir)Dependancies\rapidxml-1.13;$(SolutionDir)Dependancies\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +131,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependancies\imgui-master;$(SolutionDir)Dependancies\rapidxml-1.13;$(SolutionDir)Dependancies\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,6 +152,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependancies\imgui-master;$(SolutionDir)Dependancies\rapidxml-1.13;$(SolutionDir)Dependancies\SDL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,12 +167,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionSet.h" />
+    <ClInclude Include="Agent.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="FileUtilities.h" />
     <ClInclude Include="GenericReader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateCollection.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="XmlReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Dependancies\imgui-master\imgui.cpp" />
@@ -178,6 +186,9 @@
     <ClCompile Include="..\Dependancies\imgui-master\imgui_impl_sdlrenderer.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_tables.cpp" />
     <ClCompile Include="..\Dependancies\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionSet.cpp" />
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="main.cpp" />

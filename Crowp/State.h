@@ -7,7 +7,9 @@ class State
 {
 public:
 	State(string _name, bool _currentState);
+	State(string* _name, bool* _currentState);
 	~State();
+	string GetName();
 protected:
 
 private:

@@ -16,6 +16,10 @@ public:
 	Agent(string* _name, vector<StateCollection*> _goals, ActionSet* _actions);
 	Agent(string* _name, StateCollection* _goals[], ActionSet _actions);
 	~Agent();
+	void DebugAgent();
+	ActionSet* GetActions();
+	vector<StateCollection*> GetStates();
+	string Name();
 protected:
 
 private:

@@ -15,6 +15,8 @@ protected:
 	FileUtils* fp;
 	Window* window;
 	int i_running;
+	vector<Agent*> agents;
+	void HandleWindowEvents();
 private:
 
 };

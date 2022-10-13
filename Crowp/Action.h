@@ -10,6 +10,8 @@ public:
 	Action(string _name, StateCollection _pre, StateCollection _post);
 	Action(string* _name, StateCollection* _pre, StateCollection* _post);
 	~Action();
+	void DebugAction();
+	string Name();
 protected:
 
 private:
