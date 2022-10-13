@@ -48,18 +48,22 @@ void Window::WindowSetup()
 
 void Window::DrawWindow()
 {
+	// Assign window style
 	ImGuiStyle* _style = &ImGui::GetStyle();
 	_style->WindowMinSize = ImVec2(900, 900);
 	_style->Colors[ImGuiCol_WindowBg] = ImColor(18, 53, 36, 255);
 	_style->Colors[ImGuiCol_Border] = ImColor(0, 0, 0, 255);
 	_style->Colors[ImGuiCol_ChildBg] = ImColor(5, 34, 19, 255);
+
+	// Create window
 	ImGui::Begin("Crowp", &b_open, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_AlwaysUseWindowPadding);
 	ImGui::SetWindowPos(ImVec2(0, 0));
 	ImGui::SetWindowSize(ImVec2(900, 900), 0);
-	ImDrawList* _drawList = ImGui::GetWindowDrawList();
-	ImVec2 mousePos = ImGui::GetMousePos();
-	std::string _pos = to_string(mousePos.x) + " " + to_string(mousePos.y);
+
+	// Initialize button index
 	int _btnInd = 0;
+
+	// Create file menu
 	if (ImGui::BeginMenuBar())
 	{
 		if (ImGui::BeginMenu("File", true))
@@ -71,6 +75,7 @@ void Window::DrawWindow()
 			ImGui::EndMenu();
 		}
 		ImGui::EndMenuBar();
+		// Output the new filepath once you've ended the menu bar
 		if (b_inputFilePath)
 		{
 			char _output[1024]{};
@@ -84,7 +89,9 @@ void Window::DrawWindow()
 
 		}
 	}
-	// ImGui::LabelText(_pos.c_str(), _pos.c_str()); // This is just nice to have lol
+	
+#pragma region Agent Tray
+	// Agent Tray
 	ImGui::BeginChild("Agents", ImVec2(300, 810), true);
 	ImGui::Text("Agents");
 	for (int i = 0; i < aV_agents.size(); i++)
@@ -95,11 +102,23 @@ void Window::DrawWindow()
 		}
 	}
 	ImGui::EndChild();
-	static int mode = 0;
+#pragma endregion
+
+#pragma region Goals and Actions
+	#pragma region Agent Goals
 	ImGui::SameLine();
 	ImGui::BeginGroup();
 		ImGui::BeginChild("AgentGoals", ImVec2(250, 400), true);
 			ImGui::Text("Agent's Goals");
+			//ImGui::InvisibleButton("AgentGoalButton", ImVec2(200, 300), ImGuiButtonFlags_AllowItemOverlap | ImGuiButtonFlags_FlattenChildren);
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentGoalPayload"))
+				{
+					std::cout << "Zap" << std::endl;
+				}
+				ImGui::EndDragDropTarget();
+			}
 			if (!aV_agents.empty())
 			{
 				for (int i = 0; i < aV_agents[_currentAgent]->GetStates().size(); i++)
@@ -111,23 +130,30 @@ void Window::DrawWindow()
 						{
 
 						}
+						if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
+						{
+							ImGui::SetDragDropPayload("AgentGoalPayload", &j, sizeof(int));
+							ImGui::EndDragDropSource();
+						}
 					}
 				}
 			}
 		ImGui::EndChild();
-	
+	#pragma endregion
+	#pragma region Agent Actions
 		ImGui::SameLine();
 		ImGui::BeginChild("AgentActions", ImVec2(250, 400), true);
 			ImGui::Text("Agent's Actions");
+			//ImGui::InvisibleButton("AgentActionButton", ImVec2(200, 300), ImGuiButtonFlags_AllowItemOverlap | ImGuiButtonFlags_FlattenChildren);
 			if (ImGui::BeginDragDropTarget())
 			{
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentGoalPayload"))
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentActionPayload"))
 				{
-					if (mo_options == goalTray || mo_options == goalBin)
+					if (mo_options == goalBin)
 					{
 						mo_options = goalTray;
-						std::cout << "Beep" << std::endl;
 					}
+					std::cout << "Beep" << std::endl;
 				}
 				ImGui::EndDragDropTarget();
 			}
@@ -138,26 +164,52 @@ void Window::DrawWindow()
 					if (ImGui::Button(_actionName.c_str(), ImVec2(_actionName.length() * 10, 30)))
 					{
 						_btnInd = j;
-						ImGui::SetDragDropPayload("AgentGoalPayload", &j, sizeof(int));
 					}
 					if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_None))
 					{
+						ImGui::SetDragDropPayload("AgentActionPayload", &j, sizeof(int));
 						mo_options = goalTray;
+						std::cout << _actionName << std::endl;
 						ImGui::EndDragDropSource();
 
 					}
 				}
+
 		ImGui::EndChild();
+	#pragma endregion
+	#pragma region Unused Goals
 		ImGui::Separator();
 		_style->Colors[ImGuiCol_WindowBg] = ImColor(3, 25, 10, 255);
 		ImGui::BeginChild("UnusedGoals", ImVec2(250, 400), true);
 			ImGui::Text("Unused Goals");
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentGoalPayload"))
+				{
+					std::cout << "Beep" << std::endl;
+				}
+				ImGui::EndDragDropTarget();
+			}
 		ImGui::EndChild();
+	#pragma endregion
+	#pragma region Unused Actions
 		ImGui::SameLine();
 		ImGui::BeginChild("UnusedActions", ImVec2(250, 400), true);
 			ImGui::Text("Unused Actions");
+			if (ImGui::BeginDragDropTarget())
+			{
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentActionPayload"))
+				{
+					int j = *(const int*) payload->Data;
+					aV_agents[_currentAgent]->GetActions()->RemoveAction(j);
+					std::cout << "Removing Action!" << std::endl;
+				}
+				ImGui::EndDragDropTarget();
+			}
 		ImGui::EndChild();
+	#pragma endregion
 	ImGui::EndGroup();
+#pragma endregion
 
 	ImGui::End();
 }

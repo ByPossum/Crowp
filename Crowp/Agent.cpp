@@ -54,3 +54,13 @@ vector<StateCollection*> Agent::GetStates()
 {
 	return scV_goals;
 }
+
+void Agent::RemoveAction(int _index)
+{
+	as_actions->RemoveAction(_index);
+}
+
+void Agent::RemoveGoal(int _index)
+{
+
+}

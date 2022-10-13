@@ -17,8 +17,11 @@ public:
 	Agent(string* _name, StateCollection* _goals[], ActionSet _actions);
 	~Agent();
 	void DebugAgent();
+	void RemoveAction(int _index);
+	void RemoveGoal(int _index);
 	ActionSet* GetActions();
 	vector<StateCollection*> GetStates();
+
 	string Name();
 protected:
 
