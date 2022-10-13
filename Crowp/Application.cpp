@@ -5,24 +5,16 @@ Application::Application()
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
 
 	fp = new FileUtils();
-	string* filePath = new string("C://Users//ImHiP//AppData//LocalLow//Bon//CROWPImp//Goap//Agents//TestAgent.xml");
-	readFile = new GenericReader<string>(filePath);
-	Agent* _newAgent = readFile->ReadAgent(*filePath);
-	_newAgent->DebugAgent();
-	agents.push_back(_newAgent);
-	window = new Window(new string("Crowp"), agents);
+	am_agents = new AgentManager();
+	window = new Window(new string("Crowp"), am_agents->GetAgents());
 	i_running = 1;
 }
 
 Application::~Application()
 {
 	delete fp;
-	delete readFile;
 	delete window;
-	for (int i = 0; i < agents.size(); i++)
-	{
-		delete agents[i];
-	}
+	delete am_agents;
 	SDL_Quit();
 }
 
@@ -40,6 +32,10 @@ void Application::HandleWindowEvents()
 		case none:
 			break;
 		case updateFilePath:
+			am_agents->SetFilePath(window->FilePath());
+			am_agents->LoadAgents();
+			window->UpdateAgents(am_agents->GetAgents());
+			window->ClearEvent();
 			break;
 		case saveAgent:
 			break;

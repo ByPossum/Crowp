@@ -36,11 +36,14 @@ public:
 	void WindowSetup();
 	void DrawWindow();
 	void Update();
+	void UpdateAgents(vector<Agent*> _agents);
 	void Render();
 	void GatherInputs();
+	void SetRunning(int _newVal);
+	void ClearEvent();
 	int Running();
 	CrowpWindowEvent GetWindowEvent();
-	void SetRunning(int _newVal);
+	string* FilePath();
 protected:
 	SDL_Window* sdl_window;
 	SDL_Renderer* sdl_renderer;
@@ -55,9 +58,11 @@ protected:
 	bool b_open;
 	bool b_inputFilePath = false;
 	int _bufferSize = 64;
+	int _currentAgent = 0;
 	vector<Agent*> aV_agents;
 	MoveOptions mo_options = actionTray;
 	CrowpWindowEvent cwe_event = none;
+	string* s_filePath;
 private:
 
 };

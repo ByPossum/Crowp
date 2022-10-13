@@ -170,6 +170,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionSet.h" />
     <ClInclude Include="Agent.h" />
+    <ClInclude Include="AgentManager.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="FileUtilities.h" />
     <ClInclude Include="GenericReader.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionSet.cpp" />
     <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="AgentManager.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="main.cpp" />

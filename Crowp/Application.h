@@ -2,7 +2,7 @@
 #include "GenericReader.h"
 #include "FileUtilities.h"
 #include "Window.h"
-
+#include "AgentManager.h"
 class Application
 {
 public:
@@ -11,12 +11,11 @@ public:
 	void main();
 	int Running();
 protected:
-	GenericReader<string>* readFile;
 	FileUtils* fp;
 	Window* window;
 	int i_running;
-	vector<Agent*> agents;
 	void HandleWindowEvents();
+	AgentManager* am_agents;
 private:
 
 };

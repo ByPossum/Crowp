@@ -17,7 +17,6 @@ public:
 	GenericReader<T>(string* _filePath)
 	{
 		s_filePath = _filePath;
-		xml_doc = BufferData(s_filePath);
 	}
 	~GenericReader()
 	{

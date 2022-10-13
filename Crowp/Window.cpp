@@ -76,7 +76,9 @@ void Window::DrawWindow()
 			char _output[1024]{};
 			if (ImGui::InputText("Filepath", _output, _bufferSize, ImGuiInputTextFlags_EnterReturnsTrue))
 			{
-				std::cout << _output << std::endl;
+				s_filePath = new string(_output);
+				remove_if(s_filePath->begin(), s_filePath->end(), isspace);
+				cwe_event = updateFilePath;
 				b_inputFilePath = false;
 			}
 
@@ -84,16 +86,39 @@ void Window::DrawWindow()
 	}
 	// ImGui::LabelText(_pos.c_str(), _pos.c_str()); // This is just nice to have lol
 	ImGui::BeginChild("Agents", ImVec2(300, 810), true);
+	ImGui::Text("Agents");
 	for (int i = 0; i < aV_agents.size(); i++)
 	{
-		ImGui::Button(aV_agents[i]->Name().c_str(), ImVec2((int)aV_agents[i]->Name().length()*10, 30));
+		if (ImGui::Button(aV_agents[i]->Name().c_str(), ImVec2((int)aV_agents[i]->Name().length() * 10, 30)))
+		{
+			_currentAgent = i;
+		}
 	}
 	ImGui::EndChild();
 	static int mode = 0;
 	ImGui::SameLine();
 	ImGui::BeginGroup();
 		ImGui::BeginChild("AgentGoals", ImVec2(250, 400), true);
-				ImGui::Text("Agent's Goals");
+			ImGui::Text("Agent's Goals");
+			if (!aV_agents.empty())
+			{
+				for (int i = 0; i < aV_agents[_currentAgent]->GetStates().size(); i++)
+				{
+					for (int j = 0; j < aV_agents[_currentAgent]->GetStates()[i]->GetStates().size(); j++)
+					{
+						string _name = aV_agents[_currentAgent]->GetStates()[i]->GetStates()[j]->GetName();
+						if (ImGui::Button(_name.c_str(), ImVec2(_name.length() * 10, 30)))
+						{
+
+						}
+					}
+				}
+			}
+		ImGui::EndChild();
+	
+		ImGui::SameLine();
+		ImGui::BeginChild("AgentActions", ImVec2(250, 400), true);
+			ImGui::Text("Agent's Actions");
 			if (ImGui::BeginDragDropTarget())
 			{
 				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("AgentGoalPayload"))
@@ -106,10 +131,10 @@ void Window::DrawWindow()
 				}
 				ImGui::EndDragDropTarget();
 			}
-			for(int i = 0; i < aV_agents.size(); i++)
-				for (int j = 0; j < aV_agents[i]->GetActions()->GetActions().size(); j++)
+			if (!aV_agents.empty())
+				for (int j = 0; j < aV_agents[_currentAgent]->GetActions()->GetActions().size(); j++)
 				{
-					string _actionName = aV_agents[i]->GetActions()->GetActions()[j]->Name();
+					string _actionName = aV_agents[_currentAgent]->GetActions()->GetActions()[j]->Name();
 					if (ImGui::Button(_actionName.c_str(), ImVec2(_actionName.length() * 10, 30)))
 					{
 						_btnInd = j;
@@ -123,19 +148,14 @@ void Window::DrawWindow()
 					}
 				}
 		ImGui::EndChild();
-	
-		ImGui::SameLine();
-		ImGui::BeginChild("AgentActions", ImVec2(250, 400), true);
-			ImGui::Text("Agent's Actions");
-		ImGui::EndChild();
 		ImGui::Separator();
 		_style->Colors[ImGuiCol_WindowBg] = ImColor(3, 25, 10, 255);
-		ImGui::BeginChild("UnusedActions", ImVec2(250, 400), true);
-			ImGui::Text("Unused Actions");
-		ImGui::EndChild();
-		ImGui::SameLine();
 		ImGui::BeginChild("UnusedGoals", ImVec2(250, 400), true);
 			ImGui::Text("Unused Goals");
+		ImGui::EndChild();
+		ImGui::SameLine();
+		ImGui::BeginChild("UnusedActions", ImVec2(250, 400), true);
+			ImGui::Text("Unused Actions");
 		ImGui::EndChild();
 	ImGui::EndGroup();
 
@@ -146,6 +166,11 @@ void Window::Update()
 {
 	GatherInputs();
 	Render();
+}
+
+void Window::UpdateAgents(vector<Agent*> _agents)
+{
+	aV_agents = _agents;
 }
 
 void Window::Render()
@@ -180,6 +205,11 @@ void Window::GatherInputs()
 	}
 }
 
+void Window::ClearEvent()
+{
+	cwe_event = none;
+}
+
 int Window::Running()
 {
 	return b_open;
@@ -193,4 +223,9 @@ CrowpWindowEvent Window::GetWindowEvent()
 void Window::SetRunning(int _newVal)
 {
 	b_open = _newVal;
+}
+
+string* Window::FilePath()
+{
+	return s_filePath;
 }
